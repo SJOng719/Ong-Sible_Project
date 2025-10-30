@@ -1,0 +1,92 @@
+# Project Title: Todoist 
+
+•	This is an app that helps people who are unorganized and don't find the time to write down what they have to do and feel that day. It's a program that can help people show their calendars, organize & write down their duties for the day and write down their mood.
+
+# Problem Statement: There are people who have unorganized schedules, having an unorganized schedule could lead to forgetting important occasions or having clashing events. You can list tasks in advance and allot time for each task and the app will remind you to do it. Let's not forget that some don't find the time to write down what they feel that day, sometimes you just need someone to ask how you're doing.
+
+# Project Objectives: 
+•	To help users organize and track their daily tasks and events with reminders.
+•	To encourage self-awareness through daily mood tracking and reflections.
+•	To improve time management by displaying clear schedules and preventing overlapping activities.
+
+# Project Features:
+•	Displays calendar - Allows you to note important events (with reminder for if you need to prepare and if you need to make sure your events won't overlap)
+•	Mood tracker - Asks how you’re doing, and keeps track of your mood 
+•	Displays a list of tasks - You will be able to organize things you need to complete for the day
+
+# Project Inputs and Outputs:
+Inputs 
+•	Starting date
+•	User’s name
+•	Today’s Rating
+•	Tasks (including due date, when it's to be done, and time allotment)
+•	Events (including date of event, and when to be reminded of event)
+
+Outputs 
+•	Greeting the user by name
+•	Showing the date and reminders (like schedule/calendar)
+•	List of to do for the day
+•	Closing message 
+
+
+# Logic Plan - Pseudocode:
+
+START PROGRAM
+DISPLAY "----== TODOIST DAILY PLANNER ==----"
+
+INPUT starting_date
+INPUT user_name
+
+DISPLAY "Good day, " + user_name + "! Let's plan your day."
+
+DISPLAY "How are you feeling today, " + user_name + "?"
+INPUT mood_rating  // 1 - Terrible, 2 - Bad, 3 - Okay, 4 - Good, 5 - Amazing
+
+DISPLAY "Thank you! Your mood rating for today is " + mood_rating + "."
+
+DISPLAY a_calendar
+DISPLAY "Today's date is: " + starting_date
+
+INPUT add_event  // Prompt: Would you like to add an event? (Yes/No)
+
+WHILE add_event == "Yes" OR add_event == "yes"
+    INPUT event_name
+    INPUT event_date
+    INPUT event_time
+    INPUT reminder_time
+
+    STORE event_name, event_date, event_time, reminder_time
+
+    DISPLAY "Event '" + event_name + "' added successfully!"
+    INPUT add_event  // Ask if user wants to add another event
+ENDWHILE
+DISPLAY "----== TASK LIST ==----"
+
+INPUT add_task  // Prompt: Would you like to add a task? (Yes/No)
+
+WHILE add_task == "Yes" OR add_task == "yes"
+    INPUT task_name
+    INPUT due_date
+    INPUT time_allotment
+
+    STORE task_name, due_date, time_allotment
+
+    DISPLAY "Task '" + task_name + "' added successfully!"
+    INPUT add_task  // Ask if user wants to add another task
+ENDWHILE
+
+DISPLAY "----== DAILY SUMMARY ==----"
+DISPLAY "Date: " + starting_date
+DISPLAY "User: " + user_name
+DISPLAY "Mood Rating: " + mood_rating
+
+DISPLAY "Today's Events:"
+DISPLAY all_events
+
+DISPLAY "Today's Tasks:"
+DISPLAY all_tasks
+
+DISPLAY "Reminder: Stay positive and keep track of your goals!"
+DISPLAY "Have a productive day, " + user_name + "!"
+
+END PROGRAM
