@@ -44,5 +44,5 @@ You currently have P50 in total for tomorrow's expenses.
 Have a good day!
 
 ## Contruibutions:
-Ong, Sofia Jullian S.
-Sible. Shantelle Dame M.
+Ong, Sofia Jullian S. (concept, program, features)
+Sible. Shantelle Dame M. (concept, program, features)
