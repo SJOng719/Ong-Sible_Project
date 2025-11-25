@@ -1,16 +1,26 @@
 # Project Title: Todoist 
 
-•	This is an app that helps people who are unorganized and don't find the time to write down what they have to do and feel that day. It's a program that can help people show their calendars, organize & write down their duties for the day and write down their mood.
+•	This is an app that helps people who are unorganized and don't find the time to write down what they have to 
+do and feel that day. It's a program that can help people show their calendars, organize & write down their duties 
+for the day and write down their mood.
 
-# Problem Statement: There are people who have unorganized schedules, having an unorganized schedule could lead to forgetting important occasions or having clashing events. You can list tasks in advance and allot time for each task and the app will remind you to do it. Let's not forget that some don't find the time to write down what they feel that day, sometimes you just need someone to ask how you're doing.
+# Problem Statement: People who have unorganized schedules face challenges, this disorganization can lead to them 
+forgetting important occasions or having clashing events. An app that would allow them to list tasks in advance and 
+allot time for each one, would help them in organizing their schedule.  Those individuals sometimes as well have 
+trouble find the time to write down and convey what they feel that day, and sometimes they simply need someone to ask 
+how they are doing.
 
 # Project Objectives: 
-•	To help users organize and track their daily tasks and events with reminders.
-•	To encourage self-awareness through daily mood tracking and reflections.
-•	To improve time management by displaying clear schedules and preventing overlapping activities.
+•	To help users organize and track their daily tasks and events with reminders with notifications 
+•	To encourage self-awareness through daily mood tracking and reflections with daily check-in screen where they 
+    input their mood & write how their fay went
+•	To improve time management by displaying clear schedules and preventing overlapping activities with alerts when 
+    there is an activity already scheduled on that day & timers for activities that have a specific time allotment to 
+    avoid being behind on other scheduled activities.
 
 # Project Features:
-•	Displays calendar - Allows you to note important events (with reminder for if you need to prepare and if you need to make sure your events won't overlap)
+•	Displays calendar - Allows you to note important events (with reminder for if you need to prepare and if you need 
+    to make sure your events won't overlap)
 •	Mood tracker - Asks how you’re doing, and keeps track of your mood 
 •	Displays a list of tasks - You will be able to organize things you need to complete for the day
 
