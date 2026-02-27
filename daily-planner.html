@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todoist Daily Planner</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #d6d6ff;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgb(249, 238, 249);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h2 {
+            color: #f194da;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            text-align: center;
+            font-family: monospace
+        }
+
+        .step { display: none; }
+        .step.active { display: block; }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-next { background-color: #772da8; color: white; }
+        .btn-add { background-color: #7794b4; color: white; margin-top: 10px; }
+
+        .summary-box {
+            background: #fdfdfd;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        ul { padding-left: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>----== TODOIST DAILY PLANNER ==----</h2>
+
+    <div id="step1" class="step active">
+        <label>Starting Date:</label>
+        <input type="date" id="startDate">
+        <label>Your Name:</label>
+        <input type="text" id="userName" placeholder="Enter your name">
+        <button class="btn-next" onclick="goToStep(2)">Next</button>
+    </div>
+
+    <div id="step2" class="step">
+        <h3 id="greeting"></h3>
+        <p>How are you feeling today?</p>
+        <select id="moodRating">
+            <option value="1">1 - Terrible</option>
+            <option value="2">2 - Bad</option>
+            <option value="3" selected>3 - Okay</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Amazing</option>
+        </select>
+        <button class="btn-next" onclick="goToStep(3)">Next: Plan Events</button>
+    </div>
+
+    <div id="step3" class="step">
+        <h3>Add Events</h3>
+        <input type="text" id="evName" placeholder="Event Name">
+        <input type="time" id="evTime">
+        <button class="btn-add" onclick="addItem('event')">Add Event</button>
+        <hr>
+        <button class="btn-next" onclick="goToStep(4)">Next: Task List</button>
+    </div>
+
+    <div id="step4" class="step">
+        <h3>Add Tasks</h3>
+        <input type="text" id="taskName" placeholder="Task Name">
+        <input type="text" id="taskAllotment" placeholder="Time Allotment (e.g. 30 mins)">
+        <button class="btn-add" onclick="addItem('task')">Add Task</button>
+        <hr>
+        <button class="btn-next" onclick="showSummary()">Show Daily Summary</button>
+    </div>
+
+    <div id="step5" class="step">
+        <h3>----== DAILY SUMMARY ==----</h3>
+        <div class="summary-box" id="summaryContent"></div>
+        <p style="text-align:center;color:#555;margin-top:20px">
+            <em>Reminder: Stay positive and keep track of your goals!</em>
+        </p>
+        <button class="btn-next" onclick="clearStorage()">Reset Planner</button>
+    </div>
+</div>
+
+<script>
+    const STORAGE_KEY = "todoist_daily_planner";
+
+    let data = {
+        name: "",
+        date: "",
+        mood: "3",
+        events: [],
+        tasks: []
+    };
+
+    document.getElementById('startDate').valueAsDate = new Date();
+
+    function saveToStorage() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function loadFromStorage() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+
+        data = JSON.parse(saved);
+
+        document.getElementById('userName').value = data.name || "";
+        document.getElementById('startDate').value = data.date || "";
+        document.getElementById('moodRating').value = data.mood || "3";
+
+        if (data.name) {
+            document.getElementById('greeting').innerText = `Good day, ${data.name}!`;
+        }
+    }
+
+    function clearStorage() {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+    }
+
+    function goToStep(stepNum) {
+        if (stepNum === 2) {
+            data.name = document.getElementById('userName').value.trim();
+            data.date = document.getElementById('startDate').value;
+
+            if (!data.name) {
+                alert("Please enter your name");
+                return;
+            }
+
+            document.getElementById('greeting').innerText = `Good day, ${data.name}!`;
+        }
+
+        saveToStorage();
+
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById(`step${stepNum}`).classList.add('active');
+    }
+
+    function addItem(type) {
+        if (type === "event") {
+            const name = document.getElementById('evName').value.trim();
+            const time = document.getElementById('evTime').value;
+
+            if (!name) return alert("Event name required");
+
+            data.events.push(`${name}${time ? " at " + time : ""}`);
+            document.getElementById('evName').value = "";
+            document.getElementById('evTime').value = "";
+        } else {
+            const name = document.getElementById('taskName').value.trim();
+            const time = document.getElementById('taskAllotment').value.trim();
+
+            if (!name) return alert("Task name required");
+
+            data.tasks.push(`${name}${time ? " (" + time + ")" : ""}`);
+            document.getElementById('taskName').value = "";
+            document.getElementById('taskAllotment').value = "";
+        }
+
+        saveToStorage();
+        alert("Item added!");
+    }
+
+    function showSummary() {
+        data.mood = document.getElementById('moodRating').value;
+        saveToStorage();
+
+        const events = data.events.length
+            ? data.events.map(e => `<li>${e}</li>`).join('')
+            : "<li>No events</li>";
+
+        const tasks = data.tasks.length
+            ? data.tasks.map(t => `<li>${t}</li>`).join('')
+            : "<li>No tasks</li>";
+
+        document.getElementById('summaryContent').innerHTML = `
+            <p><strong>Date:</strong> ${data.date}</p>
+            <p><strong>User:</strong> ${data.name}</p>
+            <p><strong>Mood Rating:</strong> ${data.mood}/5</p>
+            <p><strong>Events:</strong></p>
+            <ul>${events}</ul>
+            <p><strong>Tasks:</strong></p>
+            <ul>${tasks}</ul>
+            <p><strong>Have a productive day, ${data.name}!</strong></p>
+        `;
+
+        goToStep(5);
+    }
+
+    loadFromStorage();
+</script>
+
+</body>
+</html>
