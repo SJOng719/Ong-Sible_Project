@@ -1,0 +1,85 @@
+# What is the Daily Planner Web App?
+The Daily Planner is a browser-based task and event manager that helps organize daily activities, track mood, 
+and set reminders, providing a simple step-by-step interface for planning schedules and tasks in one place.
+The application aims to help users manage their time efficiently by combining event scheduling, task tracking, 
+and automatic reminders with a clean and minimal interface.
+
+# How do we use the Daily Planner?
+1) Open the HTML file in any web browser.
+2) Enter your name and starting date.
+3) Select your mood rating for the day.
+4) Add events with date and time.
+5) Add tasks with estimated duration.
+6) View the generated daily summary.
+
+# Features
+1) Starting page / Homepage
+   User inputs name and date to begin planning.
+2) Mood Selection
+   User selects a mood rating from 1–5.
+3) Event Planner 
+   Users can:
+   - Add events (name, date, time) 
+   - View events in a list
+   - Delete events
+4) Task Manager 
+  Users can:
+  - Add tasks (name, duration in minutes)
+  - View tasks in a list
+  - Delete tasks
+5) Summary Page
+   Displays:
+   - User's name and date
+   - Mood rating
+   - List of events
+   - List of tasks
+   - An inspirational reminder
+   - Back and Reset Button
+
+# Saving Data
+The planner uses browser localStorage to automatically save all data.
+Going out of the page retains all previously entered information.
+
+# How was the Daily Planner made?
+Methodology
+The system follows a step-based workflow where the user progresses through input stages. 
+Data is collected, validated, stored, and displayed dynamically at each step.
+
+# Technology Used
+ - HTML – structure of the application
+ - CSS – styling and layout
+ - JavaScript – logic and interactivity
+ - Web APIs:
+    = localStorage for saving data
+    = Notification API for reminders
+    = AudioContext API for alert sounds
+
+# Back-end Logic
+- Data Storage
+  All data is stored in a single object and saved in localStorage using JSON format.
+- Navigation System
+  The app uses a step-based interface where only one section is visible at a time.
+- Event Management
+  Users can add, display, and delete events. Each event includes a name, date, and time.
+- Task Management
+  Users can add, display, and delete tasks. Each task includes a name and estimated duration.
+- Time Logic
+   = Events: Scheduled using exact date and time comparison
+   = Tasks: Timers based on duration (minutes converted to milliseconds)
+- Notification System
+  When time is reached:
+  = Browser notification is triggered
+  = Sound alert is played
+  = Alert message is displayed
+
+# Design Choices
+- Simple multi-step interface to reduce clutter
+- Local storage instead of database for offline use
+- Automatic saving to prevent data loss
+- Separate handling of events (fixed time) and tasks (duration-based)
+
+# Testing
+- Tested by adding and deleting multiple events and tasks
+- Tested invalid inputs (empty fields, incorrect values)
+- Tested timer and notification behavior
+- Reloaded page multiple times to verify data persistence
